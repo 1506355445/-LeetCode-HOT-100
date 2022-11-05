@@ -1,0 +1,49 @@
+You have n  tiles, where each tile has one letter tiles[i] printed on it.
+
+Return the number of possible non-empty sequences of letters you can make using the letters printed on those tiles.
+
+Example 1:
+
+Input: tiles = "AAB"
+Output: 8
+Explanation: The possible sequences are "A", "B", "AA", "AB", "BA", "AAB", "ABA", "BAA".
+
+Example 2:
+
+Input: tiles = "AAABBC"
+Output: 188
+
+Example 3:
+Input: tiles = "V"
+Output: 1
+
+思路：采用递归的方式，用一个长度为26的vector<int> ch_count来记录当前剩余的每一个字母及对应的个数。
+在递归函数dfsCount中，用count表示当前ch_count能够组成的序列数。
+遍历ch_count，每一个对应个数不为零的字母可以加入组合中，count增加一，对应的字母个数减一，然后调用递归函数。
+调用完毕后，不要忘记backtracing，对应字母的个数应当恢复原样（加一）。
+Time:O(26^N)
+Space:O(1),栈的深度为O（N）
+
+class Solution {
+    int dfsCount(vector<int>& ch_count){
+        int count=0;
+        for (int i=0;i<ch_count.size();++i){
+            if(ch_count[i]==0){
+                continue;
+            }
+            ++count;
+            ch_count[i]--;
+            count +=dfsCount(ch_count);
+            ch_count[i]++;
+        }
+        return count;
+    }
+public:
+    int numTilePossibilities(string tiles) {
+        vector<int> ch_count(26,0);
+        for(const auto tile: tiles){
+            ch_count[tile - 'A']++;
+        }
+        return dfsCount(ch_count);
+    }
+};
