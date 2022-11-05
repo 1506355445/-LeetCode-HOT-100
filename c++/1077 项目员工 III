@@ -32,5 +32,8 @@ Result 表：
 +-------------+---------------+
 employee_id 为 1 和 3 的员工在 project_id 为 1 的项目中拥有最丰富的经验。在 project_id 为 2 的项目中，employee_id 为 1 的员工拥有最丰富的经验。 
 
+select project_id,employee_id from Project join Employee using (employee_id) where (project_id,experience_years) in
+(select project_id,max(experience_years) from Project join Employee using (employee_id) group by project_id)
+
 
 
