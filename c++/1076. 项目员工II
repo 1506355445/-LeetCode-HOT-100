@@ -1,0 +1,39 @@
+编写一个SQL查询，报告所有雇员最多的项目。
+
+查询结果格式如下所示：
+
+Project table:
++-------------+-------------+
+| project_id  | employee_id |
++-------------+-------------+
+| 1           | 1           |
+| 1           | 2           |
+| 1           | 3           |
+| 2           | 1           |
+| 2           | 4           |
++-------------+-------------+
+
+Employee table:
++-------------+--------+------------------+
+| employee_id | name   | experience_years |
++-------------+--------+------------------+
+| 1           | Khaled | 3                |
+| 2           | Ali    | 2                |
+| 3           | John   | 1                |
+| 4           | Doe    | 2                |
++-------------+--------+------------------+
+
+Result table:
++-------------+
+| project_id  |
++-------------+
+| 1           |
++-------------+
+第一个项目有3名员工，第二个项目有2名员工。
+
+解题思路：本题要查询所有项目(project)中拥有最多雇员的项目。需注意以下两点：
+为了要找出每个project_id中的雇员数量，需要对project_id使用group by。
+然后对每个项目的雇员进行加和。因project表的主键是(project_id,employee_id)，所以不会存在重复条目。
+另外一点是，需要先计算出最大雇员数，然后再查询雇员数与最大雇员数相等的项目即可。 
+select project_id  from Project group by project_id having count(*) =
+(select count(employee_id) as cnt from Project group by project_id order by cnt desc limit 1)
