@@ -1,1 +1,34 @@
-
+题目：去除所有不充足的点。这里对一个点是否充足的定义是：每一条从根节点开始，通过该点到达任意叶子节点的路径的和，都严格小于题目给出的值limit。把所有不充分的点同时删除后，
+返回剩下的二叉树的根。
+思路：1. 用dfs的方法解题；
+      2. 当一个节点是叶子节点时，直接判断它是否是充分的，如果不是，返回nullptr,否则返回该节点的指针。
+      3. 当一个节点不是叶子节点时，判断它的子节点是不是都是不充分的。如果都是不充分的，那么返回nullptr，也就是说它也是不充分的，否则返回该节点的指针。
+      4. 工程上，C++可以选用smart pointer，从而不用考虑内存泄漏的问题。
+      
+class Solution {
+public:
+    TreeNode* sufficientSubset(TreeNode* root, int limit) {
+        return helper(root,limit);
+    }
+private:
+    TreeNode* helper(TreeNode* node,int limit, int cur =0){
+        if (node==nullptr){
+            return nullptr;
+        }
+        cur += node->val;
+        if (node->left ==nullptr && node->right ==nullptr)
+        {
+            if(cur < limit){
+                delete node;
+                return nullptr;
+            }
+            return node;
+        }
+        node->left =helper(node->left,limit,cur);
+        node->right=helper(node->right,limit,cur);
+        if (node->left==nullptr && node->right==nullptr){
+            return nullptr;
+        }
+        return node;
+    }
+};
