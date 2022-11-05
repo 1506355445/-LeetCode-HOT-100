@@ -1,0 +1,25 @@
+Given two strings first and second, consider occurrences in some text of the form "first second third", where second comes immediately after first, 
+and third comes immediately after second.
+
+Return an array of all the words third for each occurrence of "first second third".
+
+思路：双指针法
+ 
+class Solution {
+public:
+    vector<string> findOcurrences(string text, string first, string second) {
+        istringstream ss(text);  #istringstream类用于执行C++风格的串流的输入操作。它的作用是从string对象text中读取字符。
+        string firstStr="";
+        string secondStr="";
+        string cur="";
+        vector<string> ans;
+        while(ss >> cur){ #输入给cur,用双指针判断
+            if(firstStr==first&& secondStr==second){
+                ans.emplace_back(cur);
+            }
+            firstStr=secondStr;
+            secondStr=cur;
+        }
+        return ans;
+    }
+};
