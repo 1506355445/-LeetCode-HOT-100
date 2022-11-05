@@ -5,6 +5,17 @@
       3. 当一个节点不是叶子节点时，判断它的子节点是不是都是不充分的。如果都是不充分的，那么返回nullptr，也就是说它也是不充分的，否则返回该节点的指针。
       4. 工程上，C++可以选用smart pointer，从而不用考虑内存泄漏的问题。
       
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
     TreeNode* sufficientSubset(TreeNode* root, int limit) {
