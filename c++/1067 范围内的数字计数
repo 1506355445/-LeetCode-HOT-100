@@ -1,0 +1,25 @@
+class Soulution{
+      int recursiveCount(){
+        //退出条件
+        if(N<=9){
+            return d==0 ? 0 : (d<=N);
+        }
+        int ret=0;
+        //个位数字d出现的次数，不包含最后一次，e.g. N=797，这里只计算1-789之间个位数字出现d的次数
+        ret += (d==0 ? (N/10-1) : N/10);
+        //判断最后一次个位数字是否包含d，e.g.N=797，判断790-797之间个位数字是否出现d
+        if(N % 10 >= d){
+            ++ret;
+        }
+        //除了个位数字以外其他位数d出现的个数，e.g.N=797，我们计算了1-799之间非个位数字出现d的次数
+        ret += recursiveCount(N/10,d)*10;
+        //前面默认最后一位到9，因此我们要减去最后一位不到9的情况，e.g.N=797，我们计算798-799两数非个位数字出现d的次数
+        string nstr=to_string(N/10);
+        ret -=std::count(nstr.begin(),nstr.end(),d+'0')*(9-N%10);
+        return ret;
+      }
+public:
+    int digitsCount(int d,int low,int high){
+        return recursiveCount(high,d)-recursiveCount(low-1,d);
+    }
+}
