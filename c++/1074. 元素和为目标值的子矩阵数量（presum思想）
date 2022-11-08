@@ -4,6 +4,12 @@ A submatrix x1, y1, x2, y2 is the set of all cells matrix[x][y] with x1 <= x <= 
 
 Two submatrices (x1, y1, x2, y2) and (x1', y1', x2', y2') are different if they have some coordinate that is different: for example, if x1 != x1'.
 
+给出矩阵 matrix 和目标值 target，返回元素总和等于目标值的非空子矩阵的数量。
+
+子矩阵 x1, y1, x2, y2 是满足 x1 <= x <= x2 且 y1 <= y <= y2 的所有单元 matrix[x][y] 的集合。
+
+如果 (x1, y1, x2, y2) 和 (x1', y1', x2', y2') 两个子矩阵中部分坐标不同（如：x1 != x1'），那么这两个子矩阵也不同。
+
 Example 1:
 
 Input: matrix = [[0,1,0],[1,1,1],[0,1,0]], target = 0
