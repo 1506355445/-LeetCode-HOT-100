@@ -1,0 +1,38 @@
+对于字符串 S 和 T，只有在 S = T + … + T（T 自身连接 1 次或多次）时，我们才认定 “T 能除尽 S”。
+返回最长字符串 X，要求满足 X 能除尽 str1 且 X 能除尽 str2。
+
+示例 1：
+输入：str1 = “ABCABC”, str2 = “ABC”
+输出：“ABC”
+
+示例 2：
+输入：str1 = “ABABAB”, str2 = “ABAB”
+输出：“AB”
+
+示例 3：
+输入：str1 = “LEET”, str2 = “CODE”
+输出：""
+
+/*这道题可以用递归来求解，和求两个数的最大公约数类似。
+首先，str1和str2(假设str1.size() >= str2.size())有最大公约数的必要条件是str1的前缀等于str2。
+原因如下，假设最大公约字符串为divisor_str，那么str1=x * divisor_str，str2=y * divisor_str (x,y为正整数，且x>=y)。
+所以str1的前y个divisor_str就等于str2。
+其次，我们希望求两个字符串的最大公约字符串，就等于两个字符串之差和其中一个字符串的最大公约字符。还是用上述例子：
+str1与str2的最大公约数，也是str1-str2=(y-x)*divisor_str 与 str2
+
+class Solution {
+public:
+    string gcdOfStrings(string str1, string str2) {
+        //Puts longer string first
+        if(str1.size()<str2.size()){
+            return gcdOfStrings(str2,str1);
+        }
+        if(str2.empty()){
+            return str1;
+        }
+        if(str1.substr(0,str2.size())!=str2){
+            return "";
+        }
+        return gcdOfStrings(str1.substr(str2.size()),str2);
+    }
+};
