@@ -19,6 +19,11 @@
 1 <= words[i].length <= 50
 按序返回索引对 [i,j]（即，按照索引对的第一个索引进行排序，当第一个索引对相同时按照第二个索引对排序）。
 
+思路：这道题可以直接使用string find函数来做，但是需要分析一下时间复杂度，取决于具体的函数实现。比如CPP的find函数没有用KMP实现，所以最坏的情况复杂是O(M * N)，这样带入本题，
+时间复杂度是O(M* sum(len(word)))。其中M是text的长度，sum(len(word))是words中word的长度之和。
+如果用字典树Trie来实现，则当M<sum(len(word))时，时间复杂度可以优化。
+首先建立基于words的字典树trie，然后在text中以每一个位置i为起点向后遍历，并判断往后每一个位置j是否在字典树中，若在则加入要返回的结果rets中。
+
 struct Trie{
     vector<Trie*> children=vector<Trie*>(26,nullptr);
     bool is_find=false;
