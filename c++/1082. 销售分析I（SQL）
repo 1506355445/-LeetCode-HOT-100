@@ -1,5 +1,7 @@
 Write an SQL query that reports the best seller by total sales price, If there is a tie, report them all.
 
+编写一个 SQL 查询，查询总销售额最高的销售者，如果有并列的，就都展示出来。
+
 The query result format is in the following example:
 
 # Product table:
