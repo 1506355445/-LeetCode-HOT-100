@@ -2,6 +2,8 @@ Write an SQL query that reports the products that were only sold in the first qu
 
 Return the result table in any order.
 
+编写一个SQL查询，报告2019年春季才售出的产品。即仅在2019-01-01至2019-03-31（含）之间出售的商品。
+
 The query result format is in the following example.
 
 Input: 
