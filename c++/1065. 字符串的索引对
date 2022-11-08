@@ -19,3 +19,38 @@
 1 <= words[i].length <= 50
 按序返回索引对 [i,j]（即，按照索引对的第一个索引进行排序，当第一个索引对相同时按照第二个索引对排序）。
 
+struct Trie{
+    vector<Trie*> children=vector<Trie*>(26,nullptr);
+    bool is_find=false;
+ }
+ class Solution{
+    Trie* constructTrie(const vector<string>& words){
+        Trie* trie=new Trie();
+        for(const auto&word : words){
+            Trie* cur=trie;
+            for(const auto ch:word){
+                if(cur->children[ch-'a']=nullptr{
+                    cur->children[ch-'a']=new Trie();
+                }
+                cur=cur->children[ch-'a'];
+            }
+            cur->is_find=true;
+        }
+        return trie;
+    }
+public:
+    vector<vector<int>> indexPairs(string text,vector<string>& words){
+        const Trie* const trie=constructTrie(words);
+        vector<vector<int>> rets;
+        for(int i=0;i<text.size();++i){
+            const Trie* cur=trie;
+            for(int j=i;j<text.size() && cur!=nullptr;++j){
+                cur=cur->children[text[j]-'a'];
+                if(cur && cur->is_find){
+                    rets.push_back({i,j});
+                }
+            }
+        }
+        return rets;
+    }
+ };
