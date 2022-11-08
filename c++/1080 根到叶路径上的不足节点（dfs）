@@ -1,4 +1,9 @@
-题目：去除所有不充足的点。这里对一个点是否充足的定义是：每一条从根节点开始，通过该点到达任意叶子节点的路径的和，都严格小于题目给出的值limit。把所有不充分的点同时删除后，
+Given the root of a binary tree and an integer limit, delete all insufficient nodes in the tree simultaneously, and return the root of the resulting binary tree.
+
+A node is insufficient if every root to leaf path intersecting this node has a sum strictly less than limit.
+
+A leaf is a node with no children.
+去除所有不充足的点。这里对一个点是否充足的定义是：每一条从根节点开始，通过该点到达任意叶子节点的路径的和，都严格小于题目给出的值limit。把所有不充分的点同时删除后，
 返回剩下的二叉树的根。
 思路：1. 用dfs的方法解题；
       2. 当一个节点是叶子节点时，直接判断它是否是充分的，如果不是，返回nullptr,否则返回该节点的指针。
