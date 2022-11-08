@@ -15,13 +15,14 @@ class Solution{
         }
     }
     int res=INT_MAX;
-    vector<int> memo(1<<bikes.size(),0);
+    vector<int> memo(1<<bikes.size(),0);//1左移n位(bikes.size())，相当于2^n
     return dfs(dp,memo,0,0);
   }
 private:
     int dist(const vector<int>& worker,const vector<int>& bike){
         return abs(worker[0]-bike[0])+abs(worker[1]-bike[1]);
     }
+    //idx表示目前选择的是第几个worker
     int dfs(const vector<vector<int>>& dp,vector<int>& memo,int state,int idx){
         if(idx == dp.size()){
             return 0;
